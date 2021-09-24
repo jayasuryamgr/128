@@ -1,0 +1,23 @@
+let colours = {
+  "2":{
+   color:"#80ffcc"
+  },
+  "4":{
+   color:"#66ffff"
+  },
+   "8":{
+   color:"#ff471a"
+  },
+   "16":{
+   color:"#a6ff4d"
+  },
+   "32":{
+   color:"#80bfff"
+  },
+  "64":{
+   color:"#e6ffb3"
+  },
+  "128":{
+   color:"#ff9933"
+  }
+};
