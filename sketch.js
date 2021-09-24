@@ -54,20 +54,8 @@ function rotate_m(matrix){
 return a;
 }
 
-// Checks if player has won or game over 
-function gamestate(){
-  let gameover = isGameover();
-  if(gameover){
-    alert("GAME OVER");
-  }
-  let gamewon = isGamewon();
-  if(gamewon){
-    alert("GAME WON! PLEASE RESTART TO PLAY AGAIN");
-    return;
-  }
-}
+// Checks if player has won the game 
 
-//Used in gamestate() function
 function isGamewon(){
   if(maxi >= 128){
      return true;
@@ -75,7 +63,7 @@ function isGamewon(){
  return false;
 }
 
-//Used in gamestate() function
+//// Checks if player has any moves left 
 function isGameover(){
    for(var i=0;i<3;i++){
     for(var j=0;j<3;j++){
@@ -97,7 +85,15 @@ function isGameover(){
 }
 
 function keyPressed(){
-  gamestate();
+  let gameover = isGameover();
+  if(gameover){
+    alert("Oops! No more moves, Please press Restart to play again");
+  }
+  let gamewon = isGamewon();
+  if(gamewon){
+    alert("Hurray! You've Won! Please press Restart to play again");
+    return;
+  }
   let flipped = false;
   let rotated = false;
   let played = true;
