@@ -57,7 +57,7 @@ return a;
 // Checks if player has won the game 
 
 function isGamewon(){
-  if(maxi >= 8){
+  if(maxi >= 128){
      return true;
   }  
  return false;
