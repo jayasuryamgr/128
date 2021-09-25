@@ -1,19 +1,15 @@
 let matrix;
 let score;
-let maxi;
+
 function setup() {
   score = 0;
-  maxi = 0;
   createCanvas(350, 350);
   noLoop();
-  //highscore();
   matrix = [[0,0,0],[0,0,0],[0,0,0]];                     
   spawn_number();
   spawn_number();                                 // Initializing the 3x3 matrix with all zeroes except two cells
   updateCanvas();
 }
-
-
 
                                                 //Compares the two matrices
 function is_changed(a,b){
@@ -37,14 +33,14 @@ function copy_matrix (matrix){
 return old;
 }
 
-function flip(matrix){
+function flip(matrix){              //Reverses each row of the matrix
   for(var i=0;i<3;i++){
     matrix[i].reverse();
   }
 return matrix;
 }
 
-function rotate_m(matrix){
+function rotate_m(matrix){            //Transpose of the matrix 
   let a = [[0,0,0],[0,0,0],[0,0,0]];
   for(var i=0;i<3;i++){
     for(var j=0;j<3;j++){
@@ -56,10 +52,14 @@ return a;
 
                                   // Checks if player has won the game 
 function isGamewon(){
-  if(maxi >= 128){
+  for(var i=0;i<3;i++){
+    for(var j=0;j<3;j++){
+      if(matrix[i][j] >= 128){
      return true;
   }  
- return false;
+    }  
+  }
+  return false;
 }
 
                                         //// Checks if player has any moves left 
@@ -84,11 +84,11 @@ function isGameover(){
 }
 
 function keyPressed(){                         // Takes player inputs and modify the matrix accordingly 
-  let gameover = isGameover();
+  let gameover = isGameover();    
   if(gameover){
-    alert("Oops! No more moves, Please press Restart to play again");
+    alert("Oops! No more moves, Please press Restart to play again");      // check on key press if the game is over
   }
-  let gamewon = isGamewon();
+  let gamewon = isGamewon();                                
   if(gamewon){
     alert("Hurray! You've Won! Please press Restart to play again");
     return;
@@ -133,14 +133,13 @@ function keyPressed(){                         // Takes player inputs and modify
   if(changed){                                  //spawn the new number only if anything changed after pressing the key
   spawn_number();
   }
-  updateCanvas();
+  updateCanvas();                   
 }
 
 
-function operate(row){
+function operate(row){              // operate[2,0,2] returns [0,0,4] 
   row = slide(row);
   row = combine(row);
-  row = slide(row);
 return row;
 }
 
@@ -148,8 +147,8 @@ function grt_zero(x){
   if(x>0) return x;
 }
 
-function slide (row){                  //if row = [1,0,0] slide(row) returns [0,0,1]
-  let arr = row.filter(grt_zero);
+function slide (row){                     //slides all zeroes to one side 
+  let arr = row.filter(grt_zero);       //if row = [1,0,0] slide(row) returns [0,0,1]
   let missing = 3-arr.length;
   let zeroes = Array(missing).fill(0);
   arr = zeroes.concat(arr);
@@ -163,7 +162,6 @@ function combine(row){                   //if row1 = [1,1,0] combine(row) return
         row[i] = a+b;
         score += row[i];
         row[i-1] = 0;
-        maxi = a+b;
         break;
       }
     }  
