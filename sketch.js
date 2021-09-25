@@ -140,6 +140,8 @@ function keyPressed(){                         // Takes player inputs and modify
 function operate(row){              // operate[2,0,2] returns [0,0,4] 
   row = slide(row);
   row = combine(row);
+                                    // one more slide will cover this case of [2,2,2] -slide-> [2,2,2] -combine-> [2,0,4] -slide-> [0,2,4]
+  row = slide(row);
 return row;
 }
 
