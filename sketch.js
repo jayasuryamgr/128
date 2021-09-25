@@ -169,7 +169,7 @@ function combine(row){                   //if row1 = [1,1,0] combine(row) return
     }  
 return row;
 }
-function spawn_number(){
+function spawn_number(){                  //Spawns number randomly in the matrix where zeros are present
   let avail_spots = [];
   for(var i=0;i<3;i++){
     for(var j=0;j<3;j++){
@@ -181,11 +181,10 @@ function spawn_number(){
   if(avail_spots.length > 0){
     let spot = random(avail_spots);
     let x = random();
-    if(x>0.5){
+    if(x > 0.5){
       matrix[spot.x][spot.y] = 2;
     }
-    else if(x>0.2 && x <= 0.5) matrix[spot.x][spot.y] = 4;
-    else matrix[spot.x][spot.y] = 8;
+    else matrix[spot.x][spot.y] = 4;
   }
   
 }
@@ -208,7 +207,7 @@ function draw_matrix(){                     // Draws rectangles with numbers w.r
       let s = value.toString();
       if(value !== 0){
         stroke(0);
-        fill(colours[s].color);
+        fill(colours[s].color);         //Fill colours of rectangles acc to the number present as per colour.js
       }
         else {
           fill("#c2d6d6");
